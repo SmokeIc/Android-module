@@ -1,0 +1,60 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
+	package
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:11-39
+		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:40-98
+uses-permission#android.permission.INTERNET
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:2:5-67
+	android:name
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:2:22-64
+application
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-9:19
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-9:19
+	android:extractNativeLibs
+		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+	android:label
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:18-41
+	android:allowBackup
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:42-69
+meta-data#xposedmodule
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:4:9-70
+	android:value
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:4:48-68
+	android:name
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:4:20-47
+meta-data#xposeddescription
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:5:9-104
+	android:value
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:5:53-102
+	android:name
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:5:20-52
+meta-data#xposedminversion
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:6:9-72
+	android:value
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:6:52-70
+	android:name
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:6:20-51
+meta-data#wahook.webhook
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:9-136
+	android:value
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:50-134
+	android:name
+		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:20-49
+uses-sdk
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml

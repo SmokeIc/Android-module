@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.wahook"
+    android:versionCode="1"
+    android:versionName="0.1" >
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="33" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="false"
+        android:debuggable="true"
+        android:extractNativeLibs="true"
+        android:label="WA Hook" >
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="WhatsApp hook -> Tasker broadcast" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="93" />
+        <!-- Set your HTTPS n8n webhook here -->
+        <meta-data
+            android:name="wahook.webhook"
+            android:value="https://in.swipe4eng.ru/webhook/50ccfe2e-76b2-410a-8359-7acf2e93ba56" />
+    </application>
+
+</manifest>

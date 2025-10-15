@@ -1,0 +1,50 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.wahook"
+4    android:versionCode="1"
+5    android:versionName="0.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:2:5-67
+11-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:2:22-64
+12
+13    <application
+13-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-9:19
+14        android:allowBackup="false"
+14-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:42-69
+15        android:debuggable="true"
+16        android:extractNativeLibs="true"
+17        android:label="WA Hook" >
+17-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:18-41
+18        <meta-data
+18-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:4:9-70
+19            android:name="xposedmodule"
+19-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:4:20-47
+20            android:value="true" />
+20-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:4:48-68
+21        <meta-data
+21-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:5:9-104
+22            android:name="xposeddescription"
+22-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:5:20-52
+23            android:value="WhatsApp hook -> Tasker broadcast" />
+23-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:5:53-102
+24        <meta-data
+24-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:6:9-72
+25            android:name="xposedminversion"
+25-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:6:20-51
+26            android:value="93" />
+26-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:6:52-70
+27        <!-- Set your HTTPS n8n webhook here -->
+28        <meta-data
+28-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:9-136
+29            android:name="wahook.webhook"
+29-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:20-49
+30            android:value="https://in.swipe4eng.ru/webhook/50ccfe2e-76b2-410a-8359-7acf2e93ba56" />
+30-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:50-134
+31    </application>
+32
+33</manifest>

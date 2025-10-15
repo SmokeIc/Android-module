@@ -1,0 +1,27 @@
+apply plugin: "com.android.application"
+
+android {
+    namespace "com.example.wahook"
+    compileSdkVersion 33
+    defaultConfig {
+        applicationId "com.example.wahook"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "0.1"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compileOnly "de.robv.android.xposed:api:82"
+}
+
+repositories {
+    mavenCentral()
+    google()
+    maven { url "https://api.xposed.info/" }
+}
