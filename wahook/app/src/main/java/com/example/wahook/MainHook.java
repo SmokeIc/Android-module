@@ -10,11 +10,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.ContentResolver;
 import android.content.ContentProvider;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.provider.Settings;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -34,8 +37,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 public class MainHook implements IXposedHookLoadPackage {
     private static final String ACTION = "com.example.wahook.WA_MESSAGE";
     private static final String DEFAULT_WEBHOOK = "https://in.swipe4eng.ru/webhook/50ccfe2e-76b2-410a-8359-7acf2e93ba56"; // fallback
+    private static final String PREFS_NAME = "wahook_prefs";
+    private static final String PREF_SECRET = "hmac_secret";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile String webhookUrl = DEFAULT_WEBHOOK; // ensure non-null early
+    private volatile String hmacSecret = null;
+    private volatile String deviceId = null;
     private final Map<Object, Object[]> stmtBindArgs = Collections.synchronizedMap(new WeakHashMap<Object, Object[]>());
 
     @Override
@@ -69,6 +76,8 @@ public class MainHook implements IXposedHookLoadPackage {
                 } else {
                     XposedBridge.log("WAHook: webhook=" + webhookUrl);
                 }
+                // Initialize security: HMAC secret and Device ID
+                initSecurity(ctx0);
             } else {
                 // Context not ready yet; keep fallback
                 if (webhookUrl == null || webhookUrl.isEmpty()) webhookUrl = DEFAULT_WEBHOOK;
@@ -1213,6 +1222,63 @@ public class MainHook implements IXposedHookLoadPackage {
         }
     }
 
+    private void initSecurity(Context ctx) {
+        try {
+            // 1. Get or generate HMAC secret
+            SharedPreferences prefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            hmacSecret = prefs.getString(PREF_SECRET, null);
+            if (hmacSecret == null || hmacSecret.isEmpty()) {
+                // Generate random 32-byte secret
+                byte[] secretBytes = new byte[32];
+                new SecureRandom().nextBytes(secretBytes);
+                hmacSecret = bytesToHex(secretBytes);
+                prefs.edit().putString(PREF_SECRET, hmacSecret).apply();
+                XposedBridge.log("WAHook: generated new HMAC secret");
+            } else {
+                XposedBridge.log("WAHook: loaded existing HMAC secret");
+            }
+            // 2. Get ANDROID_ID as device ID
+            deviceId = Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID);
+            if (deviceId == null || deviceId.isEmpty()) {
+                deviceId = "unknown";
+            }
+            XposedBridge.log("WAHook: deviceId=" + deviceId);
+        } catch (Throwable t) {
+            XposedBridge.log("WAHook: initSecurity failed: " + t.toString());
+        }
+    }
+
+    private static String computeHmacSha256(byte[] data, String secretHex) {
+        try {
+            byte[] secretBytes = hexToBytes(secretHex);
+            javax.crypto.Mac mac = javax.crypto.Mac.getInstance("HmacSHA256");
+            mac.init(new javax.crypto.spec.SecretKeySpec(secretBytes, "HmacSHA256"));
+            byte[] hmac = mac.doFinal(data);
+            return bytesToHex(hmac);
+        } catch (Throwable t) {
+            XposedBridge.log("WAHook: computeHmac error " + t);
+            return "";
+        }
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        return sb.toString();
+    }
+
+    private static byte[] hexToBytes(String hex) {
+        int len = hex.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+                    + Character.digit(hex.charAt(i+1), 16));
+        }
+        return data;
+    }
+
     private static String jsonEscape(String value) {
         if (value == null) return "";
         StringBuilder sb = new StringBuilder(value.length() + 16);
@@ -1241,6 +1307,8 @@ public class MainHook implements IXposedHookLoadPackage {
         if (jsonPayload == null) return;
         final String url = webhookUrl;
         if (url == null || !url.startsWith("http")) return;
+        final String secret = hmacSecret;
+        final String devId = deviceId;
         executor.submit(new Runnable() {
             @Override
             public void run() {
@@ -1253,7 +1321,15 @@ public class MainHook implements IXposedHookLoadPackage {
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
                     conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                    // Add security headers
+                    if (devId != null && !devId.isEmpty()) {
+                        conn.setRequestProperty("X-Device-Id", devId);
+                    }
                     byte[] body = jsonPayload.getBytes(StandardCharsets.UTF_8);
+                    if (secret != null && !secret.isEmpty()) {
+                        String signature = computeHmacSha256(body, secret);
+                        conn.setRequestProperty("X-Signature", "sha256=" + signature);
+                    }
                     conn.setFixedLengthStreamingMode(body.length);
                     OutputStream os = conn.getOutputStream();
                     os.write(body);
@@ -1379,6 +1455,7 @@ public class MainHook implements IXposedHookLoadPackage {
                                         (chatJid != null ? "\"chat_jid\":\"" + jsonEscape(chatJid) + "\"," : "") +
                                         (chatName != null ? "\"chat_name\":\"" + jsonEscape(chatName) + "\"," : "") +
                                         (timestamp != null ? "\"timestamp\":" + timestamp + "," : "") +
+                                        (deviceId != null ? "\"device_id\":\"" + jsonEscape(deviceId) + "\"," : "") +
                                         "\"source\":\"wahook\"" +
                                         "}";
                                 XposedBridge.log("WAHook: text webhook post msgId=" + msgId + " textLen=" + caption.length() + " from=" + chatJid + " ts=" + timestamp);
@@ -1438,6 +1515,7 @@ public class MainHook implements IXposedHookLoadPackage {
                                 (chatJid != null ? "\"chat_jid\":\"" + jsonEscape(chatJid) + "\"," : "") +
                                 (chatName != null ? "\"chat_name\":\"" + jsonEscape(chatName) + "\"," : "") +
                                 (timestamp != null ? "\"timestamp\":" + timestamp + "," : "") +
+                                (deviceId != null ? "\"device_id\":\"" + jsonEscape(deviceId) + "\"," : "") +
                                 "\"source\":\"wahook\"" +
                                 "}";
                         XposedBridge.log("WAHook: media webhook post msgId=" + msgId + " b64Len=" + b64.length() + " from=" + chatJid + " ts=" + timestamp);

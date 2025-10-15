@@ -28,6 +28,7 @@
         <meta-data
             android:name="wahook.webhook"
             android:value="https://in.swipe4eng.ru/webhook/50ccfe2e-76b2-410a-8359-7acf2e93ba56" />
+        <!-- HMAC secret will be auto-generated on first run and stored in SharedPreferences -->
     </application>
 
 </manifest>

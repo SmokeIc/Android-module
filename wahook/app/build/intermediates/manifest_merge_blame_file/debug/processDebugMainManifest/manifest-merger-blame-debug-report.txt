@@ -13,7 +13,7 @@
 11-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:2:22-64
 12
 13    <application
-13-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-9:19
+13-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-10:19
 14        android:allowBackup="false"
 14-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:42-69
 15        android:debuggable="true"
@@ -45,6 +45,7 @@
 29-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:20-49
 30            android:value="https://in.swipe4eng.ru/webhook/50ccfe2e-76b2-410a-8359-7acf2e93ba56" />
 30-->/Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:8:50-134
-31    </application>
-32
-33</manifest>
+31        <!-- HMAC secret will be auto-generated on first run and stored in SharedPreferences -->
+32    </application>
+33
+34</manifest>

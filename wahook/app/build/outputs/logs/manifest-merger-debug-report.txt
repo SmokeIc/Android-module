@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
-INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
-INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
-INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-10:12
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-11:12
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-11:12
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-11:12
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:1-11:12
 	package
 		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:1:11-39
 		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
@@ -18,8 +18,8 @@ ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/Andr
 	android:name
 		ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:2:22-64
 application
-ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-9:19
-INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-9:19
+ADDED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-10:19
+INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml:3:5-10:19
 	android:extractNativeLibs
 		INJECTED from /Users/stanislavojcev/Desktop/Android-module/wahook/app/src/main/AndroidManifest.xml
 	android:label
